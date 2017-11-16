@@ -4,6 +4,10 @@ InteractiveNavigationController conforming to UINavigationControllerDelegate pro
 ### Prerequisites 
 This project is written by Xcode9.3 and Swift4
 
+### Tutoral
+You can read my article here (Thai)
+https://medium.com/santora-nakama/interactive-pop-transition-เพิ่มความสามารถให้กับ-interactive-pop-gesture-recognizer-ให้สามารถเรี-db90d5294bc6
+
 ### Installing
 
 Copy these files to your project
