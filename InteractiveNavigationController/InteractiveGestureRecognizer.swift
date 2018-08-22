@@ -51,7 +51,7 @@ extension InteractiveGestureRecognizer {
         case right
     }
     
-    fileprivate func getDirection(from velocity: CGPoint) -> InteractivePanDirection? {
+    private func getDirection(from velocity: CGPoint) -> InteractivePanDirection? {
         
         let velocities: [InteractivePanDirection: CGFloat] = [
             .up: -velocity.y,

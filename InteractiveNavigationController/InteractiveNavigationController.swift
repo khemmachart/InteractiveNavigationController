@@ -14,7 +14,7 @@ import UIKit
  */
 class InteractiveNavigationController: UINavigationController {
     
-    fileprivate lazy var panRecognizer: UIPanGestureRecognizer = {
+    private lazy var panRecognizer: UIPanGestureRecognizer = {
         let panRecognizer = InteractiveGestureRecognizer(target: self, action: #selector(handleGesture))
         panRecognizer.direction = .right
         panRecognizer.maximumNumberOfTouches = 1
@@ -22,19 +22,19 @@ class InteractiveNavigationController: UINavigationController {
         return panRecognizer
     }()
     
-    fileprivate lazy var animator: InteractivePopViewAnimator = {
+    private lazy var animator: InteractivePopViewAnimator = {
         let animator = InteractivePopViewAnimator()
         return animator
     }()
     
-    fileprivate var isInteractivePopGestureRecognizerEnabled: Bool {
+    private var isInteractivePopGestureRecognizerEnabled: Bool {
         if let isEnabled = interactivePopGestureRecognizer?.isEnabled {
             return isEnabled
         }
         return true
     }
     
-    fileprivate var interactionController: UIPercentDrivenInteractiveTransition?
+    private var interactionController: UIPercentDrivenInteractiveTransition?
     
     // MARK: - Initialization
     

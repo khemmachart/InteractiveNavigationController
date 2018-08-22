@@ -98,7 +98,7 @@ extension InteractivePopViewAnimator: UIViewControllerAnimatedTransitioning {
 
 extension InteractivePopViewAnimator {
     
-    fileprivate func isTabBarWillAppear(
+    private func isTabBarWillAppear(
         from fromViewController: UIViewController,
         to toViewController: UIViewController) -> Bool {
         
@@ -108,7 +108,7 @@ extension InteractivePopViewAnimator {
         return !isToViewControllerHidesTabBar && isFromViewControllerHidesTabBar
     }
     
-    fileprivate func getTemporaryTabBar(
+    private func getTemporaryTabBar(
         from fromViewController: UIViewController,
         to toViewController: UIViewController) -> UIImageView? {
         
@@ -135,14 +135,14 @@ extension InteractivePopViewAnimator {
         return nil
     }
     
-    fileprivate func getTabBarImageView(at toViewController: UIViewController) -> UIImageView {
+    private func getTabBarImageView(at toViewController: UIViewController) -> UIImageView {
         let tabBarImageView = UIImageView(frame: getTabBarFrame(from: toViewController))
         tabBarImageView.image = getScreenshot(from: toViewController.tabBarController?.tabBar)
         tabBarImageView.addSubview(getSeparatorView(from: toViewController))
         return tabBarImageView
     }
     
-    fileprivate func getTabBarFrame(from toViewController: UIViewController) -> CGRect {
+    private func getTabBarFrame(from toViewController: UIViewController) -> CGRect {
         guard let toTabBarController = toViewController.tabBarController else { return CGRect.zero }
         
         let viewFrame = toViewController.view.frame
@@ -168,7 +168,7 @@ extension InteractivePopViewAnimator {
         }
     }
     
-    fileprivate func getToViewControllerViewFrame(toViewController: UIViewController) -> CGRect {
+    private func getToViewControllerViewFrame(toViewController: UIViewController) -> CGRect {
         let frame = toViewController.view.frame
         let edgesForExtendedTopLayout = toViewController.edgesForExtendedLayout == .top
         let edgesForExtendedBottomLayout = toViewController.edgesForExtendedLayout == .bottom
@@ -208,7 +208,7 @@ extension InteractivePopViewAnimator {
         return frame
     }
     
-    fileprivate func getSeparatorView(from toViewController: UIViewController) -> UIView {
+    private func getSeparatorView(from toViewController: UIViewController) -> UIView {
         let width = getTabBarFrame(from: toViewController).width
         let height: CGFloat = 1
         let lineViewFrame = CGRect(x: 0, y: -height, width: width, height: height)
@@ -218,13 +218,13 @@ extension InteractivePopViewAnimator {
     }
     
     // In the default transition the view controller below is a little dimmer than the frontmost one
-    fileprivate func getDimmingView(at toViewController: UIViewController) -> UIView? {
+    private func getDimmingView(at toViewController: UIViewController) -> UIView? {
         let dimmingView = UIView(frame: toViewController.view.bounds)
         dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.25)
         return dimmingView
     }
     
-    fileprivate func getScreenshot(from view: UIView?) -> UIImage? {
+    private func getScreenshot(from view: UIView?) -> UIImage? {
         if let view = view {
             UIGraphicsBeginImageContext(view.frame.size)
             view.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -235,7 +235,7 @@ extension InteractivePopViewAnimator {
         return nil
     }
     
-    fileprivate func isTabBarHidden(at viewController: UIViewController) -> Bool {
+    private func isTabBarHidden(at viewController: UIViewController) -> Bool {
         if let tabBarController = viewController.tabBarController {
             return tabBarController.tabBar.isHidden || viewController.hidesBottomBarWhenPushed
         }
