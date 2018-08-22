@@ -15,7 +15,7 @@ import UIKit
 class InteractiveNavigationController: UINavigationController {
     
     private lazy var panRecognizer: UIPanGestureRecognizer = {
-        let panRecognizer = InteractiveGestureRecognizer(target: self, action: #selector(handleGesture))
+        let panRecognizer = InteractiveGestureRecognizer()
         panRecognizer.direction = .right
         panRecognizer.maximumNumberOfTouches = 1
         panRecognizer.delegate = self
@@ -36,27 +36,38 @@ class InteractiveNavigationController: UINavigationController {
     
     private var interactionController: UIPercentDrivenInteractiveTransition?
     
-    // MARK: - Initialization
+    // MARK: - Life Cycle
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         addGestureRecognizer()
         addNavigationControllerDelegate()
     }
     
-    deinit {
-        panRecognizer.removeTarget(self, action: #selector(handleGesture(recognizer:)))
-        view.removeGestureRecognizer(panRecognizer)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeGestureRecognizer()
+        removeNavigationControllerDelegate()
     }
     
     // MARK: - Utils
     
-    func addGestureRecognizer() {
+    private func addGestureRecognizer() {
+        panRecognizer.addTarget(self, action: #selector(handleGesture(recognizer:)))
         view.addGestureRecognizer(panRecognizer)
     }
     
-    func addNavigationControllerDelegate() {
+    private func removeGestureRecognizer() {
+        panRecognizer.removeTarget(self, action: #selector(handleGesture(recognizer:)))
+        view.removeGestureRecognizer(panRecognizer)
+    }
+    
+    private func addNavigationControllerDelegate() {
         delegate = self
+    }
+    
+    private func removeNavigationControllerDelegate() {
+        delegate = nil
     }
     
     // Enable the pan gesture when finished animation and the view controller has set interactive to be ture
